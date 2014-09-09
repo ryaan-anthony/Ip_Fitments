@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Product description template
+ *
+ * @var Ip_Fitments_Block_Catalog_Product_View_Fitments $this
+ */
+?>
+<?php if($fitments = $this->getFitments()): ?>
+    <h2 class="box-collateral-title"><?php echo $this->__('Vehicle Fitments') ?></h2>
+    <div class="box-collateral-content">
+        <table class="data-table" id="product-fitments-specs-table">
+            <tbody>
+            <?php foreach ($fitments as $fitment): ?>
+                <tr>
+                    <td class="data"><?php echo $fitment->getMake(); ?></td>
+                    <td class="data"><?php echo $fitment->getModel(); ?></td>
+                    <td class="data"><?php echo $fitment->getYear(); ?></td>
+                    <td class="data"><?php echo $fitment->getSubmodel(); ?></td>
+                    <td class="data"><?php echo $fitment->getEngine(); ?></td>
+                    <td class="data"><?php echo $fitment->getDrivetrain(); ?></td>
+                    <td class="data"><?php echo $fitment->getTransmission(); ?></td>
+                    <td class="data"><?php if($note = $fitment->getNote()):?><a onclick="alert('<?php echo $note;?>');" title="<?php echo $this->escapeHtml($note);?>">Note</a><?php endif;?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">decorateTable('product-fitments-specs-table')</script>
+<?php endif;?>

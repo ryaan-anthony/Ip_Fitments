@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<layout>
+
+    <default>
+        <reference name="head">
+            <action method="addJs"><file>fitments/selector.js</file></action>
+        </reference>
+    </default>
+
+    <vehicle_form>
+        <reference name="left">
+            <block type="fitments/selector_container" name="vehicle_form" before="currency" />
+        </reference>
+    </vehicle_form>
+
+    <cms_index_index>
+        <update handle="vehicle_form"/>
+    </cms_index_index>
+
+    <catalogsearch_result_index>
+        <update handle="vehicle_form"/>
+    </catalogsearch_result_index>
+
+    <catalog_category_view>
+        <update handle="vehicle_form"/>
+    </catalog_category_view>
+
+    <blogfeed_posts_list>
+        <update handle="vehicle_form"/>
+    </blogfeed_posts_list>
+
+    <catalog_product_view>
+        <update handle="vehicle_form"/>
+        <reference name="product.info">
+            <block type="fitments/catalog_product_view_fitments" name="product.fitments" as="fitments" template="fitments/product/view/tab.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle"><title>Fitments</title></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <vehiclesearch_result_index>
+        <update handle="vehicle_form"/>
+        <reference name="left">
+            <block type="fitments/search_layer" name="catalogsearch.leftnav" after="vehicle_form" template="catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="fitments/search_result" name="search.result" template="fitments/search/result.phtml">
+                <block type="catalog/product_list" name="search_result_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </vehiclesearch_result_index>
+
+</layout>

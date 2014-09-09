@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<layout>
+
+    <!-- product edit tab -->
+
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>fitment_tab</name>
+                <block>fitments/adminhtml_catalog_product_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <!-- export vehicles page -->
+
+    <fitments_export_index>
+        <reference name="content">
+            <block type="fitments/importExport_export" name="fitments_export" />
+        </reference>
+    </fitments_export_index>
+
+    <!-- import vehicles page -->
+
+    <fitments_import_index>
+        <reference name="content">
+            <block type="fitments/importExport_import" name="fitments_import" />
+        </reference>
+    </fitments_import_index>
+
+    <!-- main page! -->
+
+    <fitments_index_index>
+        <reference name="content">
+            <block type="fitments/adminhtml_index" name="fitments_index" />
+        </reference>
+    </fitments_index_index>
+
+    <!-- drivetrain -->
+
+    <fitments_drivetrain_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_drivetrain_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_drivetrain" name="fitments_grid" />
+        </reference>
+    </fitments_drivetrain_edit>
+
+    <!-- engine -->
+
+    <fitments_engine_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_engine_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_engine" name="fitments_grid" />
+        </reference>
+    </fitments_engine_edit>
+
+    <!-- make -->
+
+    <fitments_make_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_make_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_make" name="fitments_grid" />
+        </reference>
+    </fitments_make_edit>
+
+    <!-- model -->
+
+    <fitments_model_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_model_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_model" name="fitments_grid" />
+        </reference>
+    </fitments_model_edit>
+
+    <!-- submodel -->
+
+    <fitments_submodel_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_submodel_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_submodel" name="fitments_grid" />
+        </reference>
+    </fitments_submodel_edit>
+
+    <!-- transmission -->
+
+    <fitments_transmission_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_transmission_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_transmission" name="fitments_grid" />
+        </reference>
+    </fitments_transmission_edit>
+
+    <!-- year -->
+
+    <fitments_year_edit>
+        <reference name="content">
+            <block type="fitments/adminhtml_year_edit" name="fitment_edit" />
+            <block type="fitments/adminhtml_year" name="fitments_grid" />
+        </reference>
+    </fitments_year_edit>
+
+</layout>

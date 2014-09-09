@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+         <fitments translate="label">
+         	<label>Vehicle Fitments</label>
+			<tab>catalog</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>99999</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+            <groups>
+                <selector translate="label comment">
+                    <label>Selector Options</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+                        <make_sort_field translate="label">
+                            <label>[make] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>00</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </make_sort_field>
+                        <make_secondary_field translate="label">
+                            <label>[make] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>05</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </make_secondary_field>
+                        <make_sort_dir translate="label">
+                            <label>[make] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>09</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </make_sort_dir>
+
+                        <model_sort_field translate="label">
+                            <label>[model] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </model_sort_field>
+                        <model_secondary_field translate="label">
+                            <label>[model] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </model_secondary_field>
+                        <model_sort_dir translate="label">
+                            <label>[model] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </model_sort_dir>
+
+                        <year_sort_field translate="label">
+                            <label>[year] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </year_sort_field>
+                        <year_secondary_field translate="label">
+                            <label>[year] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </year_secondary_field>
+                        <year_sort_dir translate="label">
+                            <label>[year] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>29</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </year_sort_dir>
+
+                        <submodel_sort_field translate="label">
+                            <label>[submodel] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </submodel_sort_field>
+                        <submodel_secondary_field translate="label">
+                            <label>[submodel] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </submodel_secondary_field>
+                        <submodel_sort_dir translate="label">
+                            <label>[submodel] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>39</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </submodel_sort_dir>
+
+                        <engine_sort_field translate="label">
+                            <label>[engine] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </engine_sort_field>
+                        <engine_secondary_field translate="label">
+                            <label>[engine] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </engine_secondary_field>
+                        <engine_sort_dir translate="label">
+                            <label>[engine] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>49</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </engine_sort_dir>
+
+                        <drivetrain_sort_field translate="label">
+                            <label>[drivetrain] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </drivetrain_sort_field>
+                        <drivetrain_secondary_field translate="label">
+                            <label>[drivetrain] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </drivetrain_secondary_field>
+                        <drivetrain_sort_dir translate="label">
+                            <label>[drivetrain] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>59</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </drivetrain_sort_dir>
+
+                        <transmission_sort_field translate="label">
+                            <label>[transmission] Sort by:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transmission_sort_field>
+                        <transmission_secondary_field translate="label">
+                            <label>[transmission] Secondary sort:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_field</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transmission_secondary_field>
+                        <transmission_sort_dir translate="label">
+                            <label>[transmission] Direction:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>fitments/system_config_source_dir</source_model>
+                            <sort_order>69</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transmission_sort_dir>
+
+                    </fields>
+                </selector>
+            </groups>
+        </fitments>
+    </sections>
+</config>

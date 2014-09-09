@@ -1,0 +1,119 @@
+<?php
+/**
+ * @var $this Ip_Fitments_Block_Adminhtml_Catalog_Product_Tab
+ */
+?>
+<div class="entry-edit product-fitments">
+
+    <div class="entry-edit-head">
+        <h4>Vehicle Fitments</h4>
+        <div class="right">
+            <button id="delete_all_fitments" type="button" class="scalable add">
+                <span><span><span>Delete All Fitments</span></span></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="product_fitments_container" class="box">
+        <div class="hor-scroll">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>
+                        <td class="label"><label for="is_universal">Is this product universal?</label></td>
+                        <td class="value">
+                            <select id="is_universal" name="product[is_universal]" class="select">
+                                <option value="0"<?php if(!$this->isUniversal()):?> selected="selected"<?php endif;?>>No</option>
+                                <option value="1"<?php if($this->isUniversal()):?> selected="selected"<?php endif;?>>Yes</option>
+                            </select>
+                        </td>
+                        <td class="scope-label">
+                            <span class="nobr"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="hor-scroll">
+            <table id="product_fitments"<?php if($this->isUniversal()):?> style="display:none;"<?php endif;?>>
+                <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Submodel</th>
+                    <th>Engine</th>
+                    <th>Drivetrain</th>
+                    <th>Transmission</th>
+                    <th colspan="2"></th>
+                </tr>
+                <tr>
+                    <td><select data-id="make" class="fitment <?php echo $this->getSource('make')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('make')->getOptions();?></select></td>
+                    <td><select data-id="model" class="fitment <?php echo $this->getSource('model')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('model')->getOptions();?></select></td>
+                    <td><select data-id="year" class="fitment <?php echo $this->getSource('year')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('year')->getOptions();?></select></td>
+                    <td><select data-id="submodel" class="fitment <?php echo $this->getSource('submodel')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('submodel')->getOptions();?></select></td>
+                    <td><select data-id="engine" class="fitment <?php echo $this->getSource('engine')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('engine')->getOptions();?></select></td>
+                    <td><select data-id="drivetrain" class="fitment <?php echo $this->getSource('drivetrain')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('drivetrain')->getOptions();?></select></td>
+                    <td><select data-id="transmission" class="fitment <?php echo $this->getSource('transmission')->is_required ? 'required-fitment' : '';?>"><?php echo $this->getSource('transmission')->getOptions();?></select></td>
+                    <td colspan="2">
+                        <button id="add_fitment" type="button" class="scalable add">
+                            <span><span><span>Add Fitment</span></span></span>
+                        </button>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($this->getFitments() as $id => $fitment):?>
+                    <?php echo $this->getFitmentTemplate(array('id' => $id, 'fitment' => $fitment));?>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+//<![CDATA[
+$('is_universal').observe('change', function(event){
+    if(this.getValue() == 1){
+        $('product_fitments').hide();
+    } else {
+        $('product_fitments').show();
+    }
+});
+
+$('delete_all_fitments').observe('click',function(event){
+    if(confirm('Are you sure you want to delete all fitments?')){
+        $('product_fitments').select('tbody tr').each(function(elem){elem.remove();});
+    }
+});
+
+$('add_fitment').observe('click',function(event){
+    var hasErrors = false;
+    $$('.required-fitment').each(function(elem){
+        elem.setStyle({backgroundColor: '#FFF'});
+        if(elem.hasClassName('required-fitment') && !elem.value.length){
+            hasErrors = true;
+            elem.setStyle({backgroundColor: '#FFB6B6'});
+        }
+    });
+    if(hasErrors){alert('The highlighted fields are required.');return;}
+    var fitment_template = new Template(<?php echo json_encode($this->getFitmentTemplate());?>);
+    var data = new Array();
+    $$('.fitment').each(function(elem){
+        if(elem.value.length){
+            data[elem.readAttribute('data-id')] = elem.options[elem.selectedIndex].text;
+            data[elem.readAttribute('data-id')+'-id'] = elem.value;
+        }
+        elem.options[0].selected = true;
+    });
+    data['id'] = $('product_fitments').select('tbody tr').length;
+    var template = fitment_template.evaluate(data);
+    $('product_fitments').select('tbody').first().insert(template);
+
+});
+
+delete_fitment = function(elem){
+    $(elem).up('tr').remove();
+};
+//]]>
+</script>

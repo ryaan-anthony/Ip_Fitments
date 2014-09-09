@@ -1,0 +1,190 @@
+<?php
+/**
+ * @var Ip_Fitments_Block_Selector_Container $this
+ */
+?>
+<div class="block block-selector">
+    <div class="block-content">
+        <div class="block-title"><strong><span>Find a Vehicle</span></strong></div>
+        <form id="vehicle-selector" data-action="<?php echo $this->getPostUrl();?>" method="get">
+            <?php if($this->hasQuery()):?><input type="hidden" id="selected-q" name="q" value="<?php echo $this->getQuery();?>" /><?php endif;?>
+            <?php if($this->hasCategory()):?><input type="hidden" id="selected-cat" name="cat" value="<?php echo $this->getCategory();?>" /><?php endif;?>
+            <div class="input-box">
+                <label for="select-make">Make:</label>
+                <select id="select-make" name="make" class="required-notneg"><?php echo $this->getOptions('make');?></select>
+            </div>
+            <div class="input-box">
+                <label for="select-model">Model:</label>
+                <select id="select-model" name="model" class="required-notneg"><?php echo $this->getOptions('model');?></select>
+            </div>
+            <div class="input-box">
+                <label for="select-year">Year:</label>
+                <select id="select-year" name="year" class="required-notneg"><?php echo $this->getOptions('year');?></select>
+            </div>
+            <div class="input-box">
+                <label for="select-submodel">Submodel:</label>
+                <select id="select-submodel" name="submodel"><?php echo $this->getOptions('submodel');?></select>
+            </div>
+            <div class="input-box">
+                <label for="select-engine">Engine:</label>
+                <select id="select-engine" name="engine"><?php echo $this->getOptions('engine');?></select>
+            </div>
+            <div class="actions">
+                <button title="Find My Vehicle" class="button" type="submit"><span><span>Find My Vehicle</span></span></button>
+            </div>
+        </form>
+        <a id="fitment-clearall" class="clearfields" href="#">Clear All Fields</a>
+        <p class="more">Don't See Your Car? <a href="<?php echo Mage::getUrl('customer-support');?>">Click here!</a></p>
+    </div>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+        // Instantiate each selector
+        var update_url = '<?php echo $this->getUpdateUrl();?>';
+        var fitment_make = new Fitment($('select-make'), update_url);
+        var fitment_model = new Fitment($('select-model'), update_url);
+        var fitment_year = new Fitment($('select-year'), update_url);
+        var fitment_submodel = new Fitment($('select-submodel'), update_url);
+        var fitment_engine = new Fitment($('select-engine'), update_url);
+
+        // trigger last selector (if fields pre-populated)
+        var selectors = [fitment_make, fitment_model, fitment_year, fitment_submodel, fitment_engine];
+        var selector_types = [];
+        selectors.each(function(item, index){
+            if(item.selector.value == -1 &&
+                item.selector.options.length == 1 &&
+                selectors[index - 1].selector.value != -1){
+                selector_types['type'] = item.selector.readAttribute('name');
+                item.setOptions(selector_types);
+                return;
+            } else {
+                selector_types[item.selector.readAttribute('name')] = item.selector.value;
+            }
+        });
+
+        // Make
+        fitment_make.selector.observe('change', function(){
+            var self = fitment_make;
+            // reset lower options
+            fitment_model.reset();
+            fitment_year.reset();
+            fitment_submodel.reset();
+            fitment_engine.reset();
+            // get next option set
+            if(self.selector.value != -1){
+                fitment_model.setOptions({
+                    type: 'model',
+                    make: self.selector.value
+                });
+            }
+        });
+
+        // Model
+        fitment_model.selector.observe('change', function(){
+            var self = fitment_model;
+            // reset lower options
+            fitment_year.reset();
+            fitment_submodel.reset();
+            fitment_engine.reset();
+            // get next option set
+            if(self.selector.value != -1){
+                fitment_year.setOptions({
+                    type: 'year',
+                    make: fitment_make.selector.value,
+                    model: self.selector.value
+                });
+            }
+        });
+
+        // Year
+        fitment_year.selector.observe('change', function(){
+            var self = fitment_year;
+            // reset lower options
+            fitment_submodel.reset();
+            fitment_engine.reset();
+            // get next option set
+            if(self.selector.value != -1){
+                fitment_submodel.setOptions({
+                    type: 'submodel',
+                    make: fitment_make.selector.value,
+                    model: fitment_model.selector.value,
+                    year: self.selector.value
+                });
+            }
+        });
+
+        // Submodel
+        fitment_submodel.selector.observe('change', function(){
+            var self = fitment_submodel;
+            // reset lower options
+            fitment_engine.reset();
+            // get next option set
+            //if(self.selector.value != -1){
+                fitment_engine.setOptions({
+                    type: 'engine',
+                    make: fitment_make.selector.value,
+                    model: fitment_model.selector.value,
+                    year: fitment_year.selector.value,
+                    submodel: self.selector.value
+                });
+            //}
+        });
+
+        // Clear all
+        $('fitment-clearall').observe('click', function(){
+            fitment_make.selector.options[0].selected = true;
+            fitment_model.reset();
+            fitment_year.reset();
+            fitment_submodel.reset();
+            fitment_engine.reset();
+            var params = [];
+            if($('selected-q') != undefined){
+                params['q'] = $('selected-q').value;
+            }
+            if($('selected-cat') != undefined){
+                params['cat'] = $('selected-cat').value;
+            }
+            new Ajax.Request('<?php echo $this->getResetUrl();?>', {
+                method:'post',
+                parameters: params,
+                onComplete: function(response){
+                    if (200 == response.status){
+                        var result = response.responseText.evalJSON();
+                        if(result['url']){
+                            window.location = result['url'];
+                        } else {
+                            // is not used
+                            $('search_mini_form').setAttribute('action', '<?php echo Mage::getUrl('catalogsearch/result');?>');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Form submit
+        var vehicleForm = new VarienForm('vehicle-selector', true);
+        Validation.add('required-notneg','This field is required.', function(v){
+            return v != -1;
+        });
+        $('vehicle-selector').observe('submit', function(event){
+            var hasErrors = false;
+            this.select('select').each(function(elem){
+                if(elem.hasClassName('validation-failed')){
+                    hasErrors = true;
+                }
+            });
+            if(!hasErrors){
+                var uri = [];
+                var params = $('vehicle-selector').serialize(true);
+                for(var index in params){
+                    if(params[index] != -1){
+                        uri.push(index);
+                        uri.push(params[index]);
+                    }
+                }
+                setLocation(this.readAttribute('data-action') + uri.join('/'));
+            }
+            Event.stop(event);
+        });
+    //]]>
+</script>

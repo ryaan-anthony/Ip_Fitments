@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var $this Ip_Fitments_Block_Adminhtml_Catalog_Product_Tab_Template
+ */
+?>
+<?php $fitment = $this->getFitment(); ?>
+<tr>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['make']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][make_id]" type="hidden" value="<?php echo $fitment['make']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['model']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][model_id]" type="hidden" value="<?php echo $fitment['model']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['year']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][year_id]" type="hidden" value="<?php echo $fitment['year']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['submodel']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][submodel_id]" type="hidden" value="<?php echo $fitment['submodel']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['engine']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][engine_id]" type="hidden" value="<?php echo $fitment['engine']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['drivetrain']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][drivetrain_id]" type="hidden" value="<?php echo $fitment['drivetrain']['id'];?>"/>
+    </td>
+    <td>
+        <input type="text" readonly value="<?php echo $fitment['transmission']['value'];?>"/>
+        <input name="product[fitments][<?php echo $this->getId()?>][transmission_id]" type="hidden" value="<?php echo $fitment['transmission']['id'];?>"/>
+    </td>
+    <td>
+        <textarea name="product[fitments][<?php echo $this->getId()?>][note]"><?php echo $fitment['note']['value'];?></textarea></td>
+    <td><button type="button" onclick="delete_fitment(this);">X</button></td>
+</tr>
