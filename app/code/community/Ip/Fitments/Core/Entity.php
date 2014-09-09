@@ -11,9 +11,7 @@ class Ip_Fitments_Core_Entity extends Mage_Core_Model_Abstract
         } else {
             $collection = $this->getCollection();
         }
-        $field = Mage::getStoreConfig('fitments/selector/'.$fitment.'_sort_field');
-        $dir = Mage::getStoreConfig('fitments/selector/'.$fitment.'_sort_dir');
-        $collection->getSelect()->order("{$field} {$dir}");
+        $this->addSort($fitment, $collection);
         $html = $this->getOption($value, $placeholder, $selected);
         foreach($collection as $item){
             $html .= $this->getOption($item->getId(), $item->getValue(), $selected);
@@ -79,9 +77,7 @@ class Ip_Fitments_Core_Entity extends Mage_Core_Model_Abstract
             if($found === false || (isset($options[$table]) && $options[$table] == -1)){
                 unset($fromPart[$alias]);
             } else {
-                $field = Mage::getStoreConfig('fitments/selector/'.$table.'_sort_field');
-                $dir = Mage::getStoreConfig('fitments/selector/'.$table.'_sort_dir');
-                $collection->getSelect()->order("{$alias}.{$field} {$dir}");
+                $this->addSort($table, $collection, $alias);
             }
         }
         $collection->getSelect()->setPart(Zend_Db_Select::FROM, $fromPart);
@@ -106,6 +102,15 @@ class Ip_Fitments_Core_Entity extends Mage_Core_Model_Abstract
             $this->save();
         }
         return $this;
+    }
+
+    protected function addSort($type, $collection, $alias = '')
+    {
+        $field = Mage::getStoreConfig('fitments/selector/'.$type.'_sort_field');
+        $dir = Mage::getStoreConfig('fitments/selector/'.$type.'_sort_dir');
+        if($field && $dir){
+            $collection->getSelect()->order(($alias ? $alias.'.' : '')."{$field} {$dir}");
+        }
     }
 
 }
