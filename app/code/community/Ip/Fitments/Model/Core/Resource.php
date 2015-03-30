@@ -71,7 +71,7 @@ class Ip_Fitments_Model_Core_Resource
         foreach($this->table_names as $alias => $fitment){
             if(!$limit || in_array($fitment, $limit)){
                 $collection->getSelect()->joinLeft(
-                    array($alias => 'fitment_entity_'.$fitment),
+                    array($alias => Mage::getConfig()->getTablePrefix().'fitment_entity_'.$fitment),
                     $alias.'.id=main_table.'.$fitment.'_id',
                     array($fitment => 'value')
                 );
